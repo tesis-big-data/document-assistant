@@ -6,7 +6,7 @@ authors = ["Nicolas Eiris <nicolas.eiris@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-dvc = "^2.9.3"
+dvc = {extras = ["gdrive"], version = "^2.9.3"}
 
 [tool.poetry.dev-dependencies]
 
