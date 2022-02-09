@@ -1,0 +1,9 @@
+stages:
+  sales_db_export:
+    cmd: .venv/bin/python src/cleaning_json.py
+    deps:
+      - assets/json_documents
+      - src/cleaning_json.py
+    outs:
+      - assets/json_documents_clean
+  
