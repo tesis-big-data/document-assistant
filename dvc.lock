@@ -15,3 +15,18 @@ stages:
       md5: d751713988987e9331980363e24189ce.dir
       size: 0
       nfiles: 0
+  clean_documents:
+    cmd: .venv/bin/python src/cleaning_json.py
+    deps:
+    - path: assets/json_documents
+      md5: 38044a25813c5683ad04e8794c17b173.dir
+      size: 163807516
+      nfiles: 4165
+    - path: src/cleaning_json.py
+      md5: 64865f7a449b85b2a9166a07ca5f1f05
+      size: 2137
+    outs:
+    - path: assets/cleaned_documents
+      md5: 91d885ae6a5e3ddcfbd694008d857951.dir
+      size: 1010713
+      nfiles: 1

@@ -7,6 +7,10 @@ authors = ["Nicolas Eiris <nicolas.eiris@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 dvc = {extras = ["gdrive"], version = "^2.9.3"}
+simplejson = "^3.17.6"
+pandas = "^1.4.0"
+pyarrow = "^7.0.0"
+fastparquet = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 
