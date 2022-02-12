@@ -9,7 +9,7 @@ stages:
   split_dataset:
     cmd: .venv/bin/python src/split_dataset.py
     deps:
-      - assets/cleaned_documents
+      - assets/cleaned_dataset
       - src/split_dataset.py
     outs:
       - assets/splitted_dataset

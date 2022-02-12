@@ -33,7 +33,7 @@ stages:
   split_dataset:
     cmd: .venv/bin/python src/split_dataset.py
     deps:
-    - path: assets/cleaned_documents
+    - path: assets/cleaned_dataset
       md5: 91d885ae6a5e3ddcfbd694008d857951.dir
       size: 1010713
       nfiles: 1
