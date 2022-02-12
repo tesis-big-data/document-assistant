@@ -1,3 +1,7 @@
 /json_documents_clean
 /json_documents
 /cleaned_documents
+/cleaned_dataset
+/splitted_dataset
+/encoded_dataset
+/models

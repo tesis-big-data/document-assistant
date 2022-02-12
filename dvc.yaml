@@ -5,5 +5,26 @@ stages:
       - assets/json_documents
       - src/cleaning_json.py
     outs:
+      - assets/cleaned_dataset
+  split_dataset:
+    cmd: .venv/bin/python src/split_dataset.py
+    deps:
       - assets/cleaned_documents
-  
+      - src/split_dataset.py
+    outs:
+      - assets/splitted_dataset
+  encode_dataset:
+    cmd: .venv/bin/python src/encode_dataset.py
+    deps:
+      - assets/splitted_dataset
+      - src/encode_dataset.py
+    outs:
+      - assets/encoded_dataset
+  train:
+    cmd: .venv/bin/python src/train.py
+    deps:
+      - assets/encoded_dataset
+      - src/train.py
+    outs:
+      - assets/models
+ 

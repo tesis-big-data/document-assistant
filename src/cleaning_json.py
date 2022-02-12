@@ -2,19 +2,14 @@ from pathlib import Path
 import os
 import pandas as pd
 import simplejson as json
+from constants import (
+    CLEANED_DATASET_FILE,
+    CLEANED_DATASET_PATH,
+    FOLDERS_TO_PROCESS,
+    RAW_DOCUMENTS_PATH,
+)
 
 MIN_CONF = 50
-FOLDERS_TO_PROCESS = [
-    "La Comercial SRL",
-    "Modadol",
-    "Fernando Garcia",
-    "Ayala",
-    "Antilur",
-    "La Banderita",
-    "Los Nietitos",
-    "Marioni",
-    "Masula",
-]
 
 
 def remove_unconfident_words(doc_conf, doc_text):
@@ -30,10 +25,8 @@ def remove_unconfident_words(doc_conf, doc_text):
 
 
 def clean_documents():
-    path_to_raw_documents = "assets/json_documents"
-
     # Open a file
-    dirs = os.listdir(path_to_raw_documents)
+    dirs = os.listdir(RAW_DOCUMENTS_PATH)
 
     # This would print all the files and directories
     df = pd.DataFrame()
@@ -42,9 +35,9 @@ def clean_documents():
     for folder in dirs:
         print(f"Cleaning {folder} documents...")
         if folder in FOLDERS_TO_PROCESS:
-            file_dirs = os.listdir(path_to_raw_documents + "/" + folder)
+            file_dirs = os.listdir(RAW_DOCUMENTS_PATH + "/" + folder)
             for file in file_dirs:
-                doc = open(f"{path_to_raw_documents}/{folder}/{file}")
+                doc = open(f"{RAW_DOCUMENTS_PATH}/{folder}/{file}")
                 json_doc = json.load(doc)
                 doc_conf = json_doc["ORC_Data"]["conf"]
                 doc_text = json_doc["ORC_Data"]["text"]
@@ -57,17 +50,10 @@ def clean_documents():
 
     df["Category_Id"] = df["Client"].factorize()[0]
 
-    category_id_df = (
-        df[["Client", "Category_Id"]].drop_duplicates().sort_values("Category_Id")
-    )
-    category_to_id = dict(category_id_df.values)
-    id_to_category = dict(category_id_df[["Category_Id", "Client"]].values)
-
     print(df.tail(20))
-    df.to_parquet("assets/cleaned_documents/dataset.parquet", index=False)
+    df.to_parquet(CLEANED_DATASET_FILE, index=False)
 
 
 if __name__ == "__main__":
-    Path("assets/cleaned_documents").mkdir(exist_ok=True, parents=True)
+    Path(CLEANED_DATASET_PATH).mkdir(exist_ok=True, parents=True)
     clean_documents()
-    print("HOLA BIENVENIDO A LA TESIS")
