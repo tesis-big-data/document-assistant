@@ -13,6 +13,9 @@ pyarrow = "^7.0.0"
 fastparquet = "^0.8.0"
 sklearn = "^0.0"
 joblib = "^1.1.0"
+azure-cognitiveservices-vision-computervision = "^0.9.0"
+Pillow = "^9.0.1"
+environs = "^9.5.0"
 
 [tool.poetry.dev-dependencies]
 

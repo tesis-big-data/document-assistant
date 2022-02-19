@@ -99,6 +99,26 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "cloudpickle"]
 
 [[package]]
+name = "azure-cognitiveservices-vision-computervision"
+version = "0.9.0"
+description = "Microsoft Azure Cognitive Services Computer Vision Client Library for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+
+[[package]]
+name = "azure-common"
+version = "1.1.28"
+description = "Microsoft Azure Client Library for Python (Common)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "cachetools"
 version = "5.0.0"
 description = "Extensible memoizing collections and decorators"
@@ -251,7 +271,7 @@ watch = ["pyinotify"]
 
 [[package]]
 name = "dvc"
-version = "2.9.3"
+version = "2.9.4"
 description = "Git for data scientists - manage your code and data together"
 category = "main"
 optional = false
@@ -300,7 +320,7 @@ voluptuous = ">=0.11.7"
 [package.extras]
 all = ["adlfs (>=2021.10.0)", "azure-identity (>=1.4.0)", "knack", "pydrive2[fsspec] (>=1.9.4)", "gcsfs (>=2021.11.1)", "pyarrow (>=1)", "fsspec", "ossfs (>=2021.8.0)", "s3fs[boto3] (>=2021.11.1)", "bcrypt", "sshfs[bcrypt] (>=2021.11.2)", "webdav4 (>=0.9.3)"]
 azure = ["adlfs (>=2021.10.0)", "azure-identity (>=1.4.0)", "knack"]
-dev = ["adlfs (>=2021.10.0)", "azure-identity (>=1.4.0)", "knack", "pydrive2[fsspec] (>=1.9.4)", "gcsfs (>=2021.11.1)", "pyarrow (>=1)", "fsspec", "ossfs (>=2021.8.0)", "s3fs[boto3] (>=2021.11.1)", "bcrypt", "sshfs[bcrypt] (>=2021.11.2)", "webdav4 (>=0.9.3)", "tpi[ssh] (>=2.1.0)", "wheel (==0.37.0)", "dvc-ssh (==0.0.1a0)", "pytest (==6.2.5)", "pytest-cov (==3.0.0)", "pytest-xdist (==2.5.0)", "pytest-mock (==3.6.1)", "pytest-lazy-fixture (==0.6.3)", "flaky (==3.7.0)", "mock (==4.0.3)", "pytest-timeout (==2.0.2)", "rangehttpserver (==1.2.0)", "mock-ssh-server (==0.9.1)", "wget (==3.2)", "filelock (==3.4.0)", "wsgidav (==3.1.1)", "crc32c (==2.2.post0)", "xmltodict (==0.12.0)", "google-compute-engine (==2.8.13)", "google-cloud-storage (==1.43.0)", "dvclive[image] (==0.4.6)", "hdfs (==2.6.0)", "Pygments (==2.10.0)", "collective.checkdocs (==0.2)", "pydocstyle (==6.1.1)", "pylint (==2.12.2)", "pylint-pytest (==1.1.2)", "pylint-plugin-utils (==0.6)", "mypy (==0.921)", "types-requests (==2.26.2)", "types-tabulate (==0.8.3)", "types-toml (==0.10.1)", "pytest-docker (==0.10.3)", "pywin32 (>=225)"]
+dev = ["adlfs (>=2021.10.0)", "azure-identity (>=1.4.0)", "knack", "pydrive2[fsspec] (>=1.9.4)", "gcsfs (>=2021.11.1)", "pyarrow (>=1)", "fsspec", "ossfs (>=2021.8.0)", "s3fs[boto3] (>=2021.11.1)", "bcrypt", "sshfs[bcrypt] (>=2021.11.2)", "webdav4 (>=0.9.3)", "tpi[ssh] (>=2.1.0)", "wheel (==0.37.1)", "dvc-ssh (==0.0.1a0)", "pytest (==6.2.5)", "pytest-cov (==3.0.0)", "pytest-xdist (==2.5.0)", "pytest-mock (==3.7.0)", "pytest-lazy-fixture (==0.6.3)", "flaky (==3.7.0)", "mock (==4.0.3)", "pytest-timeout (==2.1.0)", "rangehttpserver (==1.2.0)", "mock-ssh-server (==0.9.1)", "wget (==3.2)", "filelock (==3.4.2)", "wsgidav (==4.0.1)", "crc32c (==2.2.post0)", "xmltodict (==0.12.0)", "google-compute-engine (==2.8.13)", "google-cloud-storage (==2.1.0)", "dvclive[image] (==0.5.1)", "hdfs (==2.6.0)", "collective.checkdocs (==0.2)", "pydocstyle (==6.1.1)", "pylint (==2.12.2)", "pylint-pytest (==1.1.2)", "pylint-plugin-utils (==0.7)", "mypy (==0.931)", "types-requests (==2.27.10)", "types-tabulate (==0.8.5)", "types-toml (==0.10.4)", "pytest-docker (==0.10.3)", "pywin32 (>=225)"]
 gdrive = ["pydrive2[fsspec] (>=1.9.4)"]
 gs = ["gcsfs (>=2021.11.1)"]
 hdfs = ["pyarrow (>=1)", "fsspec"]
@@ -309,9 +329,27 @@ s3 = ["s3fs[boto3] (>=2021.11.1)"]
 ssh = ["bcrypt", "sshfs[bcrypt] (>=2021.11.2)"]
 ssh_gssapi = ["sshfs[gssapi] (>=2021.11.2)"]
 terraform = ["tpi[ssh] (>=2.1.0)"]
-tests = ["tpi[ssh] (>=2.1.0)", "wheel (==0.37.0)", "dvc-ssh (==0.0.1a0)", "pytest (==6.2.5)", "pytest-cov (==3.0.0)", "pytest-xdist (==2.5.0)", "pytest-mock (==3.6.1)", "pytest-lazy-fixture (==0.6.3)", "flaky (==3.7.0)", "mock (==4.0.3)", "pytest-timeout (==2.0.2)", "rangehttpserver (==1.2.0)", "mock-ssh-server (==0.9.1)", "wget (==3.2)", "filelock (==3.4.0)", "wsgidav (==3.1.1)", "crc32c (==2.2.post0)", "xmltodict (==0.12.0)", "google-compute-engine (==2.8.13)", "google-cloud-storage (==1.43.0)", "dvclive[image] (==0.4.6)", "hdfs (==2.6.0)", "Pygments (==2.10.0)", "collective.checkdocs (==0.2)", "pydocstyle (==6.1.1)", "pylint (==2.12.2)", "pylint-pytest (==1.1.2)", "pylint-plugin-utils (==0.6)", "mypy (==0.921)", "types-requests (==2.26.2)", "types-tabulate (==0.8.3)", "types-toml (==0.10.1)", "pytest-docker (==0.10.3)", "pywin32 (>=225)"]
+tests = ["tpi[ssh] (>=2.1.0)", "wheel (==0.37.1)", "dvc-ssh (==0.0.1a0)", "pytest (==6.2.5)", "pytest-cov (==3.0.0)", "pytest-xdist (==2.5.0)", "pytest-mock (==3.7.0)", "pytest-lazy-fixture (==0.6.3)", "flaky (==3.7.0)", "mock (==4.0.3)", "pytest-timeout (==2.1.0)", "rangehttpserver (==1.2.0)", "mock-ssh-server (==0.9.1)", "wget (==3.2)", "filelock (==3.4.2)", "wsgidav (==4.0.1)", "crc32c (==2.2.post0)", "xmltodict (==0.12.0)", "google-compute-engine (==2.8.13)", "google-cloud-storage (==2.1.0)", "dvclive[image] (==0.5.1)", "hdfs (==2.6.0)", "collective.checkdocs (==0.2)", "pydocstyle (==6.1.1)", "pylint (==2.12.2)", "pylint-pytest (==1.1.2)", "pylint-plugin-utils (==0.7)", "mypy (==0.931)", "types-requests (==2.27.10)", "types-tabulate (==0.8.5)", "types-toml (==0.10.4)", "pytest-docker (==0.10.3)", "pywin32 (>=225)"]
 webdav = ["webdav4 (>=0.9.3)"]
 webdhfs_kerberos = ["requests-kerberos (==0.14.0)"]
+
+[[package]]
+name = "environs"
+version = "9.5.0"
+description = "simplified environment variable parsing"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+marshmallow = ">=3.0.0"
+python-dotenv = "*"
+
+[package.extras]
+dev = ["pytest", "dj-database-url", "dj-email-url", "django-cache-url", "flake8 (==4.0.1)", "flake8-bugbear (==21.9.2)", "mypy (==0.910)", "pre-commit (>=2.4,<3.0)", "tox"]
+django = ["dj-database-url", "dj-email-url", "django-cache-url"]
+lint = ["flake8 (==4.0.1)", "flake8-bugbear (==21.9.2)", "mypy (==0.910)", "pre-commit (>=2.4,<3.0)"]
+tests = ["pytest", "dj-database-url", "dj-email-url", "django-cache-url"]
 
 [[package]]
 name = "fastparquet"
@@ -574,6 +612,17 @@ docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [[package]]
+name = "isodate"
+version = "0.6.1"
+description = "An ISO 8601 date/time/duration parser and formatter"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = "*"
+
+[[package]]
 name = "joblib"
 version = "1.1.0"
 description = "Lightweight pipelining with Python functions"
@@ -588,6 +637,37 @@ description = "Cross-language email validation. Backed by a database of thousand
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "marshmallow"
+version = "3.14.1"
+description = "A lightweight library for converting complex datatypes to and from native Python datatypes."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+dev = ["pytest", "pytz", "simplejson", "mypy (==0.910)", "flake8 (==4.0.1)", "flake8-bugbear (==21.9.2)", "pre-commit (>=2.4,<3.0)", "tox"]
+docs = ["sphinx (==4.3.0)", "sphinx-issues (==1.2.0)", "alabaster (==0.7.12)", "sphinx-version-warning (==1.1.2)", "autodocsumm (==0.2.7)"]
+lint = ["mypy (==0.910)", "flake8 (==4.0.1)", "flake8-bugbear (==21.9.2)", "pre-commit (>=2.4,<3.0)"]
+tests = ["pytest", "pytz", "simplejson"]
+
+[[package]]
+name = "msrest"
+version = "0.6.21"
+description = "AutoRest swagger generator Python client runtime."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+isodate = ">=0.6.0"
+requests = ">=2.16,<3.0"
+requests-oauthlib = ">=0.5.0"
+
+[package.extras]
+async = ["aiohttp (>=3.0)", "aiodns"]
 
 [[package]]
 name = "multidict"
@@ -644,6 +724,19 @@ rsa = ">=3.1.4"
 six = ">=1.6.1"
 
 [[package]]
+name = "oauthlib"
+version = "3.2.0"
+description = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+rsa = ["cryptography (>=3.0.0)"]
+signals = ["blinker (>=1.4.0)"]
+signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
+
+[[package]]
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
@@ -690,6 +783,14 @@ description = "Python version of Google's common library for parsing, formatting
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "pillow"
+version = "9.0.1"
+description = "Python Imaging Library (Fork)"
+category = "main"
+optional = false
+python-versions = ">=3.7"
 
 [[package]]
 name = "ply"
@@ -875,6 +976,17 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 six = ">=1.5"
 
 [[package]]
+name = "python-dotenv"
+version = "0.19.2"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "python-fsutil"
 version = "0.6.0"
 description = "file-system utilities for lazy devs."
@@ -929,6 +1041,21 @@ urllib3 = ">=1.21.1,<1.27"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
+
+[[package]]
+name = "requests-oauthlib"
+version = "1.3.1"
+description = "OAuthlib authentication support for Requests."
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[package.dependencies]
+oauthlib = ">=3.0.0"
+requests = ">=2.0.0"
+
+[package.extras]
+rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
 [[package]]
 name = "rich"
@@ -1225,7 +1352,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a3e1bc35aea3e4857dc4486c5860484a876c098a9ae67084c9198c554a8bc9da"
+content-hash = "8e353d62b3bdbbdfbc3f1af69988e1a6e312826613c1298fe70e14d9c62ffbaa"
 
 [metadata.files]
 aiohttp = [
@@ -1329,6 +1456,14 @@ atpublic = [
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
+]
+azure-cognitiveservices-vision-computervision = [
+    {file = "azure-cognitiveservices-vision-computervision-0.9.0.zip", hash = "sha256:26c28828786d6e57ab5a4bc6b9e787a2a653ad1ad3ec0a46ce15f70d800286c2"},
+    {file = "azure_cognitiveservices_vision_computervision-0.9.0-py2.py3-none-any.whl", hash = "sha256:a36b4725b9a159311a34864399d10c9daae295df52e029e806aeddef350ddb5a"},
+]
+azure-common = [
+    {file = "azure-common-1.1.28.zip", hash = "sha256:4ac0cd3214e36b6a1b6a442686722a5d8cc449603aa833f3f0f40bda836704a3"},
+    {file = "azure_common-1.1.28-py2.py3-none-any.whl", hash = "sha256:5c12d3dcf4ec20599ca6b0d3e09e86e146353d443e7fcc050c9a19c1f9df20ad"},
 ]
 cachetools = [
     {file = "cachetools-5.0.0-py3-none-any.whl", hash = "sha256:8fecd4203a38af17928be7b90689d8083603073622229ca7077b72d8e5a976e4"},
@@ -1533,8 +1668,12 @@ dulwich = [
     {file = "dulwich-0.20.32.tar.gz", hash = "sha256:dc5498b072bdc12c1effef4b6202cd2a4542bb1c6dbb4ddcfc8c6d53e08b488c"},
 ]
 dvc = [
-    {file = "dvc-2.9.3-py3-none-any.whl", hash = "sha256:00b22a912d93c26ab4a26362c1222ec47d86df524c78947e58ce9ffbba9d8685"},
-    {file = "dvc-2.9.3.tar.gz", hash = "sha256:513d0d9ee3c3123e616f760eb8556ee569121286c3e400a1fe4b3bf66e6dea29"},
+    {file = "dvc-2.9.4-py3-none-any.whl", hash = "sha256:be47ccb1c336acfbf34731cb91afce5c3f2d141a93e6f8972848206a3e011939"},
+    {file = "dvc-2.9.4.tar.gz", hash = "sha256:8c35383154309592e969dcdcb64a4aeb679a4b27d3c188335510054a6acd8fc1"},
+]
+environs = [
+    {file = "environs-9.5.0-py2.py3-none-any.whl", hash = "sha256:1e549569a3de49c05f856f40bce86979e7d5ffbbc4398e7f338574c220189124"},
+    {file = "environs-9.5.0.tar.gz", hash = "sha256:a76307b36fbe856bdca7ee9161e6c466fd7fcffc297109a118c59b54e27e30c9"},
 ]
 fastparquet = [
     {file = "fastparquet-0.8.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:83eb4e5f9acb9aefa099cc3ff968985a004003686f1b7ee77b4d08d85f7477fe"},
@@ -1705,12 +1844,24 @@ importlib-resources = [
     {file = "importlib_resources-5.4.0-py3-none-any.whl", hash = "sha256:33a95faed5fc19b4bc16b29a6eeae248a3fe69dd55d4d229d2b480e23eeaad45"},
     {file = "importlib_resources-5.4.0.tar.gz", hash = "sha256:d756e2f85dd4de2ba89be0b21dba2a3bbec2e871a42a3a16719258a11f87506b"},
 ]
+isodate = [
+    {file = "isodate-0.6.1-py2.py3-none-any.whl", hash = "sha256:0751eece944162659049d35f4f549ed815792b38793f07cf73381c1c87cbed96"},
+    {file = "isodate-0.6.1.tar.gz", hash = "sha256:48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"},
+]
 joblib = [
     {file = "joblib-1.1.0-py2.py3-none-any.whl", hash = "sha256:f21f109b3c7ff9d95f8387f752d0d9c34a02aa2f7060c2135f465da0e5160ff6"},
     {file = "joblib-1.1.0.tar.gz", hash = "sha256:4158fcecd13733f8be669be0683b96ebdbbd38d23559f54dca7205aea1bf1e35"},
 ]
 mailchecker = [
     {file = "mailchecker-4.1.11.tar.gz", hash = "sha256:3e63e5d8fef62bd5586f2f8a92de0b3865d83edee786ee372c49aebf885ad720"},
+]
+marshmallow = [
+    {file = "marshmallow-3.14.1-py3-none-any.whl", hash = "sha256:04438610bc6dadbdddb22a4a55bcc7f6f8099e69580b2e67f5a681933a1f4400"},
+    {file = "marshmallow-3.14.1.tar.gz", hash = "sha256:4c05c1684e0e97fe779c62b91878f173b937fe097b356cd82f793464f5bc6138"},
+]
+msrest = [
+    {file = "msrest-0.6.21-py2.py3-none-any.whl", hash = "sha256:c840511c845330e96886011a236440fafc2c9aff7b2df9c0a92041ee2dee3782"},
+    {file = "msrest-0.6.21.tar.gz", hash = "sha256:72661bc7bedc2dc2040e8f170b6e9ef226ee6d3892e01affd4d26b06474d68d8"},
 ]
 multidict = [
     {file = "multidict-6.0.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:0b9e95a740109c6047602f4db4da9949e6c5945cefbad34a1299775ddc9a62e2"},
@@ -1805,6 +1956,10 @@ oauth2client = [
     {file = "oauth2client-4.1.3-py2.py3-none-any.whl", hash = "sha256:b8a81cc5d60e2d364f0b1b98f958dbd472887acaf1a5b05e21c28c31a2d6d3ac"},
     {file = "oauth2client-4.1.3.tar.gz", hash = "sha256:d486741e451287f69568a4d26d70d9acd73a2bbfa275746c535b4209891cccc6"},
 ]
+oauthlib = [
+    {file = "oauthlib-3.2.0-py3-none-any.whl", hash = "sha256:6db33440354787f9b7f3a6dbd4febf5d0f93758354060e802f6c06cb493022fe"},
+    {file = "oauthlib-3.2.0.tar.gz", hash = "sha256:23a8208d75b902797ea29fd31fa80a15ed9dc2c6c16fe73f5d346f83f6fa27a2"},
+]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
@@ -1839,6 +1994,40 @@ pathspec = [
 phonenumbers = [
     {file = "phonenumbers-8.12.42-py2.py3-none-any.whl", hash = "sha256:19f353604ef09b19165ebfc86f0a9e54df75939480c2508770f7d1a4adc8e194"},
     {file = "phonenumbers-8.12.42.tar.gz", hash = "sha256:8b54871ed64ecfce494a078e9d56b363c23e24c5916dfd89e84b985a18955bee"},
+]
+pillow = [
+    {file = "Pillow-9.0.1-cp310-cp310-macosx_10_10_universal2.whl", hash = "sha256:9bfdb82cdfeccec50aad441afc332faf8606dfa5e8efd18a6692b5d6e79f00fd"},
+    {file = "Pillow-9.0.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:5100b45a4638e3c00e4d2320d3193bdabb2d75e79793af7c3eb139e4f569f16f"},
+    {file = "Pillow-9.0.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:528a2a692c65dd5cafc130de286030af251d2ee0483a5bf50c9348aefe834e8a"},
+    {file = "Pillow-9.0.1-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:0f29d831e2151e0b7b39981756d201f7108d3d215896212ffe2e992d06bfe049"},
+    {file = "Pillow-9.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:855c583f268edde09474b081e3ddcd5cf3b20c12f26e0d434e1386cc5d318e7a"},
+    {file = "Pillow-9.0.1-cp310-cp310-win32.whl", hash = "sha256:d9d7942b624b04b895cb95af03a23407f17646815495ce4547f0e60e0b06f58e"},
+    {file = "Pillow-9.0.1-cp310-cp310-win_amd64.whl", hash = "sha256:81c4b81611e3a3cb30e59b0cf05b888c675f97e3adb2c8672c3154047980726b"},
+    {file = "Pillow-9.0.1-cp37-cp37m-macosx_10_10_x86_64.whl", hash = "sha256:413ce0bbf9fc6278b2d63309dfeefe452835e1c78398efb431bab0672fe9274e"},
+    {file = "Pillow-9.0.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:80fe64a6deb6fcfdf7b8386f2cf216d329be6f2781f7d90304351811fb591360"},
+    {file = "Pillow-9.0.1-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cef9c85ccbe9bee00909758936ea841ef12035296c748aaceee535969e27d31b"},
+    {file = "Pillow-9.0.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1d19397351f73a88904ad1aee421e800fe4bbcd1aeee6435fb62d0a05ccd1030"},
+    {file = "Pillow-9.0.1-cp37-cp37m-win32.whl", hash = "sha256:d21237d0cd37acded35154e29aec853e945950321dd2ffd1a7d86fe686814669"},
+    {file = "Pillow-9.0.1-cp37-cp37m-win_amd64.whl", hash = "sha256:ede5af4a2702444a832a800b8eb7f0a7a1c0eed55b644642e049c98d589e5092"},
+    {file = "Pillow-9.0.1-cp38-cp38-macosx_10_10_x86_64.whl", hash = "sha256:b5b3f092fe345c03bca1e0b687dfbb39364b21ebb8ba90e3fa707374b7915204"},
+    {file = "Pillow-9.0.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:335ace1a22325395c4ea88e00ba3dc89ca029bd66bd5a3c382d53e44f0ccd77e"},
+    {file = "Pillow-9.0.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:db6d9fac65bd08cea7f3540b899977c6dee9edad959fa4eaf305940d9cbd861c"},
+    {file = "Pillow-9.0.1-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f154d173286a5d1863637a7dcd8c3437bb557520b01bddb0be0258dcb72696b5"},
+    {file = "Pillow-9.0.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:14d4b1341ac07ae07eb2cc682f459bec932a380c3b122f5540432d8977e64eae"},
+    {file = "Pillow-9.0.1-cp38-cp38-win32.whl", hash = "sha256:effb7749713d5317478bb3acb3f81d9d7c7f86726d41c1facca068a04cf5bb4c"},
+    {file = "Pillow-9.0.1-cp38-cp38-win_amd64.whl", hash = "sha256:7f7609a718b177bf171ac93cea9fd2ddc0e03e84d8fa4e887bdfc39671d46b00"},
+    {file = "Pillow-9.0.1-cp39-cp39-macosx_10_10_x86_64.whl", hash = "sha256:80ca33961ced9c63358056bd08403ff866512038883e74f3a4bf88ad3eb66838"},
+    {file = "Pillow-9.0.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:1c3c33ac69cf059bbb9d1a71eeaba76781b450bc307e2291f8a4764d779a6b28"},
+    {file = "Pillow-9.0.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:12875d118f21cf35604176872447cdb57b07126750a33748bac15e77f90f1f9c"},
+    {file = "Pillow-9.0.1-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:514ceac913076feefbeaf89771fd6febde78b0c4c1b23aaeab082c41c694e81b"},
+    {file = "Pillow-9.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d3c5c79ab7dfce6d88f1ba639b77e77a17ea33a01b07b99840d6ed08031cb2a7"},
+    {file = "Pillow-9.0.1-cp39-cp39-win32.whl", hash = "sha256:718856856ba31f14f13ba885ff13874be7fefc53984d2832458f12c38205f7f7"},
+    {file = "Pillow-9.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:f25ed6e28ddf50de7e7ea99d7a976d6a9c415f03adcaac9c41ff6ff41b6d86ac"},
+    {file = "Pillow-9.0.1-pp37-pypy37_pp73-macosx_10_10_x86_64.whl", hash = "sha256:011233e0c42a4a7836498e98c1acf5e744c96a67dd5032a6f666cc1fb97eab97"},
+    {file = "Pillow-9.0.1-pp37-pypy37_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:253e8a302a96df6927310a9d44e6103055e8fb96a6822f8b7f514bb7ef77de56"},
+    {file = "Pillow-9.0.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6295f6763749b89c994fcb6d8a7f7ce03c3992e695f89f00b741b4580b199b7e"},
+    {file = "Pillow-9.0.1-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:a9f44cd7e162ac6191491d7249cceb02b8116b0f7e847ee33f739d7cb1ea1f70"},
+    {file = "Pillow-9.0.1.tar.gz", hash = "sha256:6c8bc8238a7dfdaf7a75f5ec5a663f4173f8c367e5a39f87e720495e1eed75fa"},
 ]
 ply = [
     {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
@@ -2035,6 +2224,10 @@ python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
+python-dotenv = [
+    {file = "python-dotenv-0.19.2.tar.gz", hash = "sha256:a5de49a31e953b45ff2d2fd434bbc2670e8db5273606c1e737cc6b93eff3655f"},
+    {file = "python_dotenv-0.19.2-py2.py3-none-any.whl", hash = "sha256:32b2bdc1873fd3a3c346da1c6db83d0053c3c62f28f1f38516070c4c8971b1d3"},
+]
 python-fsutil = [
     {file = "python-fsutil-0.6.0.tar.gz", hash = "sha256:e684aa34ecd7f28adf35036e60f3baa8409ce1944d81c027832b1ed6cf1c742f"},
     {file = "python_fsutil-0.6.0-py3-none-any.whl", hash = "sha256:6ddafa5d26005ac4a92fdb12a4d61269810554f9c5538d3e8e618da42a65a8ba"},
@@ -2085,6 +2278,10 @@ pyyaml = [
 requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
+]
+requests-oauthlib = [
+    {file = "requests-oauthlib-1.3.1.tar.gz", hash = "sha256:75beac4a47881eeb94d5ea5d6ad31ef88856affe2332b9aafb52c6452ccf0d7a"},
+    {file = "requests_oauthlib-1.3.1-py2.py3-none-any.whl", hash = "sha256:2577c501a2fb8d05a304c09d090d6e47c306fef15809d102b327cf8364bddab5"},
 ]
 rich = [
     {file = "rich-11.2.0-py3-none-any.whl", hash = "sha256:d5f49ad91fb343efcae45a2b2df04a9755e863e50413623ab8c9e74f05aee52b"},
