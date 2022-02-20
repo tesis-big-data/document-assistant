@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 from scipy import ndimage
 import copy
+from azure_ocr import AzureOCR
 
 #Función que toma template_img lo busca en orig_image y retorna el template encontrado en orig_image y el resultado del ajuste.
 #Distancia es el umbral para aceptar el ajuste del template, menor distancia mas estricto el ajuste
@@ -61,18 +62,18 @@ def template_match(template_img,orig_image,distance=0.7,min_match_count=4):
 
 #Función para buscar los datos del template en la factura a analizar, 
 #devuelve diccionario con los valores detectados
-def get_ocr_data_keypoints(Image_To_Convert, json_template_data, json_img_data):
+def get_ocr_data_keypoints(Image_To_Convert, json_template_data, json_img_data, retry_ocr=True):
     for keypoint in json_template_data:
         if keypoint in json_img_data:
             del json_img_data[keypoint]
         if not (keypoint == "extension" or keypoint == "name"):
+            x_inicial_template=json_template_data[keypoint][0][0]
+            y_inicial_template=json_template_data[keypoint][0][1]
+            x_final_template=json_template_data[keypoint][1][0]
+            y_final_template=json_template_data[keypoint][1][1]
             for i in range(len(json_img_data["ORC_Data_Crop"]["text"])):
                 x_centro_palabra = json_img_data["ORC_Data_Crop"]["left"][i] + round(json_img_data["ORC_Data_Crop"]["width"][i]/2)
                 y_centro_palabra = json_img_data["ORC_Data_Crop"]["top"][i] + round(json_img_data["ORC_Data_Crop"]["height"][i]/2)
-                x_inicial_template=json_template_data[keypoint][0][0]
-                y_inicial_template=json_template_data[keypoint][0][1]
-                x_final_template=json_template_data[keypoint][1][0]
-                y_final_template=json_template_data[keypoint][1][1]
                 if x_inicial_template <= x_centro_palabra <= x_final_template:
                     if y_inicial_template <= y_centro_palabra <= y_final_template:
                         if keypoint in json_img_data:
@@ -80,7 +81,7 @@ def get_ocr_data_keypoints(Image_To_Convert, json_template_data, json_img_data):
                         else:
                             json_img_data[keypoint]=json_img_data["ORC_Data_Crop"]["text"][i]
 
-            if keypoint not in json_img_data:
+            if retry_ocr and keypoint not in json_img_data:
                 img_aux,crop_ocr = get_ocr_data(Image_To_Convert[y_inicial_template:y_final_template, x_inicial_template:x_final_template])
                 #cv2.imshow("crop",img_aux)
                 if len(crop_ocr["text"])>0:
@@ -333,11 +334,10 @@ def get_ocr_data(Image_To_Convert, min_conf = 0, deleted_words=[""," "], draw_re
     return Image_To_Convert,imagedataocrcopy
 
 #Función para extraer el OCR de una imagen con servicio de Azure, devuelve imagen procesada y datos de OCR
-def get_ocr_data_azure(Image_To_Convert, min_conf = 0, deleted_words=[""," "], draw_rectangles=False):
-    #Get OCR Data from Image
-    imagedataocr = tess.image_to_data(
-        Image_To_Convert, output_type=Output.DICT)
-
+def get_ocr_data_azure(Bytes_Image_To_Convert, Image_To_Convert, min_conf = 0, deleted_words=[""," "], draw_rectangles=False):
+    ocr = AzureOCR()
+    imagedataocr = ocr.extract_document(Bytes_Image_To_Convert)
+  
     #Generate OCR Data Copy
     imagedataocrcopy = copy.deepcopy(imagedataocr)
 
@@ -348,7 +348,7 @@ def get_ocr_data_azure(Image_To_Convert, min_conf = 0, deleted_words=[""," "], d
 
     #Verify all OCR Data and delete Confidences = -1 or deleted words
     for i in range(n_boxes):
-        if int(imagedataocr['conf'][i]) > min_conf and (imagedataocr['text'][i] not in deleted_words):
+        if int(100*imagedataocr['conf'][i]) > min_conf and (imagedataocr['text'][i] not in deleted_words):
             (x, y, w, h) = (imagedataocr['left'][i], imagedataocr['top']
                             [i], imagedataocr['width'][i], imagedataocr['height'][i])
             if draw_rectangles:

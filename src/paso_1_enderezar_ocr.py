@@ -2,7 +2,7 @@ import cv2
 import os
 from os import path
 import simplejson as json
-import Funciones
+import funciones
 
 #Accepted file extensions to be processed
 Accepted_file_extension = [".jpg", ".jpeg", ".png"]
@@ -67,26 +67,26 @@ for root, dirs, files in os.walk(".\\Facturas_Originales", topdown=False):
 
             #Adjust Image size to match Max Size
             print("Resizing Image...")
-            img_to_be_processed,aux_img_data = Funciones.adjust_image_size(img_to_be_processed)
+            img_to_be_processed,aux_img_data = funciones.adjust_image_size(img_to_be_processed)
             img_data.update(aux_img_data)
 
             #Adjust Image rotation to straighten lines
             print("Rotating Image...")
             if not os.path.isfile(img_data_file_name):
-                img_to_be_processed,img_data["img_correction_angle"] = Funciones.auto_adjust_image_rotation(img_to_be_processed)
+                img_to_be_processed,img_data["img_correction_angle"] = funciones.auto_adjust_image_rotation(img_to_be_processed)
             else:
-                img_to_be_processed,img_data["img_correction_angle"] = Funciones.manual_adjust_image_rotation(img_to_be_processed)
+                img_to_be_processed,img_data["img_correction_angle"] = funciones.manual_adjust_image_rotation(img_to_be_processed)
 
             #Adjust Image so text is legible
             print("Text Orienting Image...")
-            img_to_be_processed,img_data["img_orientation"] = Funciones.adjust_image_orientation(img_to_be_processed)
+            img_to_be_processed,img_data["img_orientation"] = funciones.adjust_image_orientation(img_to_be_processed)
             
             #Add the Orientation to the correction angle
             img_data["img_correction_angle"] = img_data["img_correction_angle"] - img_data["img_orientation"]
 
             #Adjust Image so text is legible
             print("Extracting OCR from Image...")
-            img_to_be_processed,img_data["ORC_Data"] = Funciones.get_ocr_data(img_to_be_processed)
+            img_to_be_processed,img_data["ORC_Data"] = funciones.get_ocr_data(img_to_be_processed)
 
             #Save proccessed file in same location
             print("Saving Processed Image...")

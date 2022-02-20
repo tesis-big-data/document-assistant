@@ -20,8 +20,8 @@ class AzureOCR:
     """
 
     def _authenticate_azure_ocr(self):
-        subscription_key = env("AZURE_KEY")
-        endpoint = env("AZURE_ENDPOINT")
+        subscription_key = "33c11e77685b420aa4819823958cad56"
+        endpoint = "https://ort.cognitiveservices.azure.com/"
 
         return ComputerVisionClient(
             endpoint, CognitiveServicesCredentials(subscription_key)
@@ -31,19 +31,20 @@ class AzureOCR:
         left = bounding_box[0]
         top = bounding_box[1]
         width = bounding_box[2] - bounding_box[0]
-        height = bounding_box[1] - bounding_box[7]
+        height = bounding_box[7] - bounding_box[1]
         return top, left, width, height
 
     """
     OCR: Read File using the Read API, extract text - remote
     """
 
-    def extract_document(self, file_path: str):
-        read_image_path = Path(file_path)
-        print(read_image_path)
+    def extract_document(self, read_image):
+        #read_image_path = Path(file_path)
+        #print(read_image_path)
 
         # Open the image
-        read_image = open(read_image_path, "rb")
+        #prueba = open('.\Facturas_Corregidas\Antilur\Antilur_1.png', "rb")
+        #print(type(prueba))
 
         # Call API with image and raw response (allows you to get the operation location)
         read_response = self.azure_ocr_client.read_in_stream(read_image, raw=True)
@@ -84,8 +85,3 @@ class AzureOCR:
 
         print(extraction)
         return extraction
-
-
-# Usage example
-ocr = AzureOCR()
-ocr.extract_document("./src/Antilur_3.png")
