@@ -20,7 +20,9 @@ import pdf2image
 import tkinter as tk
 import simplejson as json
 import copy
-import Funciones
+import funciones
+import io
+import time 
 
 #Accepted file extensions to be processed
 accepted_file_extension = [".jpg", ".jpeg", ".png"]
@@ -74,17 +76,23 @@ for root, dirs, files in os.walk(Adjusted_Files_Directory, topdown=False):
             img_to_be_processed = cv2.imread(os.path.join(root, filename))
             template_to_be_processed = cv2.imread(template_img_file_name)
 
-            img_to_be_processed,matching_result = Funciones.template_match(template_to_be_processed,img_to_be_processed)
+            #Adjust Image so text is legible
+            print("Matching Template on Image...")
+            img_to_be_processed,matching_result = funciones.template_match(template_to_be_processed,img_to_be_processed)
             
             if matching_result:
                 #Adjust Image so text is legible
                 print("Extracting OCR from Image...")
-                img_to_be_processed,img_data["ORC_Data_Crop"] = Funciones.get_ocr_data(
-                    img_to_be_processed)
+                
+                is_success, im_buf_arr = cv2.imencode(".png", img_to_be_processed)
+                bytes_img_to_be_processed = io.BytesIO(im_buf_arr)
+                #print(type(bytes_img_to_be_processed))
+
+                img_to_be_processed,img_data["ORC_Data_Crop"] = funciones.get_ocr_data_azure(bytes_img_to_be_processed,img_to_be_processed)
 
                 #Extract data from image
                 print("Extracting data OCR...")
-                img_data = Funciones.get_ocr_data_keypoints(img_to_be_processed,template_data, img_data)
+                img_data = funciones.get_ocr_data_keypoints(img_to_be_processed,template_data, img_data,retry_ocr = False)
 
                 #Save proccessed file in same location
                 print("Saving Cropped Image...")
@@ -102,4 +110,5 @@ for root, dirs, files in os.walk(Adjusted_Files_Directory, topdown=False):
             else:
                 #Template no detectado
                 print("Template no detectado en Image Data...") 
+    time.sleep(2)
 
