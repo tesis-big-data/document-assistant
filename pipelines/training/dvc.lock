@@ -1,0 +1,62 @@
+schema: '2.0'
+stages:
+  clean_documents:
+    cmd: .venv/bin/python src/cleaning_json.py
+    deps:
+    - path: assets/json_documents
+      md5: 38044a25813c5683ad04e8794c17b173.dir
+      size: 163807516
+      nfiles: 4165
+    - path: src/cleaning_json.py
+      md5: dbb2536e5cbc84a36a54f6012295a855
+      size: 1711
+    outs:
+    - path: assets/cleaned_dataset
+      md5: 91d885ae6a5e3ddcfbd694008d857951.dir
+      size: 1010713
+      nfiles: 1
+  split_dataset:
+    cmd: .venv/bin/python src/split_dataset.py
+    deps:
+    - path: assets/cleaned_dataset
+      md5: 91d885ae6a5e3ddcfbd694008d857951.dir
+      size: 1010713
+      nfiles: 1
+    - path: src/split_dataset.py
+      md5: bbd280f5f3051245523ab6819efc526a
+      size: 892
+    outs:
+    - path: assets/splitted_dataset
+      md5: e4909dfb2f249b40d64d68154c84f393.dir
+      size: 1186788
+      nfiles: 4
+  encode_dataset:
+    cmd: .venv/bin/python src/encode_dataset.py
+    deps:
+    - path: assets/splitted_dataset
+      md5: e4909dfb2f249b40d64d68154c84f393.dir
+      size: 1186788
+      nfiles: 4
+    - path: src/encode_dataset.py
+      md5: afaf728e42e6e5da476cbe74bb9a82b4
+      size: 1333
+    outs:
+    - path: assets/encoded_dataset
+      md5: 4719989f8e6259c54babfdbb3c6edba5.dir
+      size: 812091016
+      nfiles: 4
+  train:
+    cmd: .venv/bin/python src/train.py
+    deps:
+    - path: assets/encoded_dataset
+      md5: 4719989f8e6259c54babfdbb3c6edba5.dir
+      size: 812091016
+      nfiles: 4
+    - path: src/train.py
+      md5: 6d05128a7b520e9d709aeb43d04962bd
+      size: 932
+    outs:
+    - path: assets/models
+      md5: 6826ba0f2f35d9c0c3a22a27e08f01b1.dir
+      size: 1760166
+      nfiles: 1
