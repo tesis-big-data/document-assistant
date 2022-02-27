@@ -16,6 +16,9 @@ joblib = "^1.1.0"
 azure-cognitiveservices-vision-computervision = "^0.9.0"
 Pillow = "^9.0.1"
 environs = "^9.5.0"
+opencv-contrib-python = "^4.5.5"
+pytesseract = "^0.3.9"
+ipdb = "^0.13.9"
 
 [tool.poetry.dev-dependencies]
 

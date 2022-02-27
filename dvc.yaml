@@ -1,14 +1,5 @@
 stages:
-  preprocess_images:
-    wdir: ../../
-    cmd: .venv/bin/python src/preprocess_images.py
-    deps:
-      - assets/json_documents
-      - src/cleaning_json.py
-    outs:
-      - assets/cleaned_dataset
   clean_documents:
-    wdir: ../../
     cmd: .venv/bin/python src/cleaning_json.py
     deps:
       - assets/json_documents
@@ -16,7 +7,6 @@ stages:
     outs:
       - assets/cleaned_dataset
   split_dataset:
-    wdir: ../../
     cmd: .venv/bin/python src/split_dataset.py
     deps:
       - assets/cleaned_dataset
@@ -24,7 +14,6 @@ stages:
     outs:
       - assets/splitted_dataset
   encode_dataset:
-    wdir: ../../
     cmd: .venv/bin/python src/encode_dataset.py
     deps:
       - assets/splitted_dataset
@@ -32,7 +21,6 @@ stages:
     outs:
       - assets/encoded_dataset
   train:
-    wdir: ../../
     cmd: .venv/bin/python src/train.py
     deps:
       - assets/encoded_dataset
