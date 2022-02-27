@@ -79,7 +79,6 @@ def extract_fields():
 
                     is_success, im_buf_arr = cv2.imencode(".png", img_to_be_processed)
                     bytes_img_to_be_processed = io.BytesIO(im_buf_arr)
-                    # print(type(bytes_img_to_be_processed))
 
                     (
                         img_to_be_processed,
