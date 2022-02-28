@@ -5,13 +5,22 @@ import simplejson as json
 from constants import (
     CLEANED_DATASET_FILE,
     CLEANED_DATASET_PATH,
-    FOLDERS_TO_PROCESS,
     INFERENCE_CURRENT_EXEC_PATH,
     RAW_DOCUMENTS_PATH,
     INFERENCE_CURRENT_EXEC_JSON_PATH,
 )
 
 MIN_CONF = 50
+
+
+def get_folders_to_process():
+    root = RAW_DOCUMENTS_PATH
+    return [
+        item
+        for item in os.listdir(root)
+        if os.path.isdir(os.path.join(root, item))
+        and len(os.listdir(os.path.join(root, item))) > 10
+    ]
 
 
 def remove_unconfident_words(doc_conf, doc_text):
@@ -41,10 +50,13 @@ def clean_documents_training():
     df = pd.DataFrame()
     data = []
 
+    folders_to_process = get_folders_to_process()
+
     for folder in dirs:
         print(f"Cleaning {folder} documents...")
-        if folder in FOLDERS_TO_PROCESS:
+        if folder in folders_to_process:
             file_dirs = os.listdir(RAW_DOCUMENTS_PATH + "/" + folder)
+
             for file in file_dirs:
                 doc = open(f"{RAW_DOCUMENTS_PATH}/{folder}/{file}")
                 doc_text = concat_text(json.load(doc))

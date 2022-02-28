@@ -1,5 +1,5 @@
 outs:
-- md5: 38044a25813c5683ad04e8794c17b173.dir
-  size: 163807516
-  nfiles: 4165
+- md5: c61a85caf91a1038f15663e8a71dcd3f.dir
+  size: 108774768
+  nfiles: 3382
   path: json_documents

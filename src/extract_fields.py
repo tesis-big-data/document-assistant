@@ -50,7 +50,6 @@ def extract_fields():
                 "json": f"{client_template}/{client}_template.json",
             }
 
-            rotated_image_path = f"{folder}/{name}{extension}"
             cropped_image_path = f"{INFERENCE_CURRENT_EXEC_CROPPED_IMAGES_PATH}/cropped_{document_id}{extension}"
 
             if extension in accepted_file_extension and not os.path.isfile(
@@ -96,6 +95,10 @@ def extract_fields():
                         retry_ocr=False,
                     )
 
+                    # Draw results into cropped img
+                    txt = f"Client: {client} - Fecha: {json_document['Fecha']} - Numero: {json_document['Numero']} - Total: {json_document['Total']}"
+                    cv_utils.draw_text(img_to_be_processed, txt, pos=(40, 20))
+
                     # Save proccessed file in same location
                     print("Saving Cropped Image...")
                     cv2.imwrite(cropped_image_path, img_to_be_processed)
@@ -110,7 +113,8 @@ def extract_fields():
                     ) as json_file:
                         json.dump(json_document, json_file)
 
+                    time.sleep(5)
+
                 else:
                     # Template no detectado
                     print("Template no detectado en Image Data...")
-        time.sleep(2)

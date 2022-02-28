@@ -39,13 +39,6 @@ class AzureOCR:
     """
 
     def extract_document(self, read_image):
-        #read_image_path = Path(file_path)
-        #print(read_image_path)
-
-        # Open the image
-        #prueba = open('.\Facturas_Corregidas\Antilur\Antilur_1.png', "rb")
-        #print(type(prueba))
-
         # Call API with image and raw response (allows you to get the operation location)
         read_response = self.azure_ocr_client.read_in_stream(read_image, raw=True)
 
@@ -59,7 +52,7 @@ class AzureOCR:
             read_result = self.azure_ocr_client.get_read_result(operation_id)
             if read_result.status not in ["notStarted", "running"]:
                 break
-            time.sleep(1)
+            time.sleep(5)
 
         extraction = {
             "text": [],

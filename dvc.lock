@@ -19,59 +19,59 @@ stages:
     cmd: .venv/bin/python src/cleaning_json.py
     deps:
     - path: assets/json_documents
-      md5: 38044a25813c5683ad04e8794c17b173.dir
-      size: 163807516
-      nfiles: 4165
+      md5: c61a85caf91a1038f15663e8a71dcd3f.dir
+      size: 108774768
+      nfiles: 3382
     - path: src/cleaning_json.py
-      md5: e31afe8a5f4acd5e51bb621cbbbd1882
-      size: 2546
+      md5: 678c2874b74862b048977ed4e7d52c42
+      size: 2803
     outs:
     - path: assets/cleaned_dataset
-      md5: 91d885ae6a5e3ddcfbd694008d857951.dir
-      size: 1010713
+      md5: ed2b003a1ffd4050051de36889ab55a0.dir
+      size: 750503
       nfiles: 1
   split_dataset:
     cmd: .venv/bin/python src/split_dataset.py
     deps:
     - path: assets/cleaned_dataset
-      md5: 91d885ae6a5e3ddcfbd694008d857951.dir
-      size: 1010713
+      md5: ed2b003a1ffd4050051de36889ab55a0.dir
+      size: 750503
       nfiles: 1
     - path: src/split_dataset.py
-      md5: bbd280f5f3051245523ab6819efc526a
-      size: 892
+      md5: 0724e5180835d23d1279780c1cf2ba68
+      size: 893
     outs:
     - path: assets/splitted_dataset
-      md5: e4909dfb2f249b40d64d68154c84f393.dir
-      size: 1186788
+      md5: ad5a7673bd96560d37aafce1ccced638.dir
+      size: 916267
       nfiles: 4
   encode_dataset:
     cmd: .venv/bin/python src/encode_dataset.py
     deps:
     - path: assets/splitted_dataset
-      md5: e4909dfb2f249b40d64d68154c84f393.dir
-      size: 1186788
+      md5: ad5a7673bd96560d37aafce1ccced638.dir
+      size: 916267
       nfiles: 4
     - path: src/encode_dataset.py
       md5: 3547e1c2bc96e375eb5a7f3601218203
       size: 1898
     outs:
     - path: assets/encoded_dataset
-      md5: 9182a593cb3e84b367bf79673b1e6883.dir
-      size: 813328913
+      md5: a19f6caae63e6a0e03d9e5c793c1f826.dir
+      size: 559376818
       nfiles: 5
   train:
     cmd: .venv/bin/python src/train.py
     deps:
     - path: assets/encoded_dataset
-      md5: 9182a593cb3e84b367bf79673b1e6883.dir
-      size: 813328913
+      md5: a19f6caae63e6a0e03d9e5c793c1f826.dir
+      size: 559376818
       nfiles: 5
     - path: src/train.py
-      md5: 6d05128a7b520e9d709aeb43d04962bd
-      size: 932
+      md5: 6052afff0c97f75dbd284d96458c3054
+      size: 1241
     outs:
     - path: assets/models
-      md5: a8bec14e04275bd58bb5c77ce4750ede.dir
-      size: 1760166
+      md5: cce2939fa11f589e5b40a7c4612ff472.dir
+      size: 1170876
       nfiles: 1

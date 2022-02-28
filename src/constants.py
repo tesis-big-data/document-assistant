@@ -1,15 +1,3 @@
-FOLDERS_TO_PROCESS = [
-    "La Comercial SRL",
-    "Modadol",
-    "Fernando Garcia",
-    "Ayala",
-    "Antilur",
-    "La Banderita",
-    "Los Nietitos",
-    "Marioni",
-    "Masula",
-]
-
 RAW_DOCUMENTS_PATH = "assets/json_documents"
 
 CLEANED_DATASET_PATH = "assets/cleaned_dataset"

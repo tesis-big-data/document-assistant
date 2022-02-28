@@ -4,8 +4,9 @@ from sklearn.metrics import classification_report
 from pathlib import Path
 from sklearn.svm import LinearSVC
 import pandas as pd
+import os
 from constants import (
-    FOLDERS_TO_PROCESS,
+    RAW_DOCUMENTS_PATH,
     TRAIN_ENCODED_FEATURES_FILE,
     TEST_ENCODED_FEATURES_FILE,
     TRAIN_ENCODED_TARGET_FILE,
@@ -13,6 +14,16 @@ from constants import (
     MODEL_FILE,
     MODELS_PATH,
 )
+
+
+def get_folders_to_process():
+    root = RAW_DOCUMENTS_PATH
+    return [
+        item
+        for item in os.listdir(root)
+        if os.path.isdir(os.path.join(root, item))
+        and len(os.listdir(os.path.join(root, item))) > 10
+    ]
 
 
 def train():
@@ -26,7 +37,9 @@ def train():
 
     y_test_pred = model.predict(X_test)
 
-    print(classification_report(y_test, y_test_pred, target_names=FOLDERS_TO_PROCESS))
+    targets = get_folders_to_process()
+    print("TARGEt", targets)
+    print(classification_report(y_test, y_test_pred, target_names=targets))
 
     dump(model, MODEL_FILE)
 
