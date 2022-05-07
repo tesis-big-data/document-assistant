@@ -89,6 +89,7 @@ def clean_documents_inference():
         )
 
     df = df.append(data, ignore_index=True)
+    print(df)
     df["OCR_text"] = df["OCR_text"].replace("\s+", " ", regex=True).str.lower()
 
     print(df.tail(20))

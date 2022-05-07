@@ -1,0 +1,44 @@
+{
+    "Cliente": [
+        [
+            495,
+            263
+        ],
+        [
+            1126,
+            298
+        ]
+    ],
+    "Fecha": [
+        [
+            12,
+            404
+        ],
+        [
+            130,
+            443
+        ]
+    ],
+    "Numero": [
+        [
+            914,
+            101
+        ],
+        [
+            1030,
+            135
+        ]
+    ],
+    "Total": [
+        [
+            1023,
+            727
+        ],
+        [
+            1149,
+            771
+        ]
+    ],
+    "extension": ".png",
+    "name": ".\\Facturas_Templates\\Fernando Garcia\\Fernando Garcia_template.png"
+}

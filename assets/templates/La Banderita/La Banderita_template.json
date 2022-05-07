@@ -1,0 +1,44 @@
+{
+    "Cliente": [
+        [
+            554,
+            253
+        ],
+        [
+            858,
+            313
+        ]
+    ],
+    "Fecha": [
+        [
+            1242,
+            63
+        ],
+        [
+            1432,
+            110
+        ]
+    ],
+    "Numero": [
+        [
+            1272,
+            123
+        ],
+        [
+            1406,
+            177
+        ]
+    ],
+    "Total": [
+        [
+            1419,
+            1459
+        ],
+        [
+            1599,
+            1506
+        ]
+    ],
+    "extension": ".png",
+    "name": ".\\Facturas_Templates\\La Banderita\\La Banderita_template.png"
+}

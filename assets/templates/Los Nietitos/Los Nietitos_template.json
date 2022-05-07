@@ -1,0 +1,44 @@
+{
+    "Cliente": [
+        [
+            437,
+            273
+        ],
+        [
+            651,
+            330
+        ]
+    ],
+    "Fecha": [
+        [
+            1092,
+            300
+        ],
+        [
+            1265,
+            394
+        ]
+    ],
+    "Numero": [
+        [
+            1055,
+            180
+        ],
+        [
+            1275,
+            247
+        ]
+    ],
+    "Total": [
+        [
+            1222,
+            1997
+        ],
+        [
+            1506,
+            2097
+        ]
+    ],
+    "extension": ".jpg",
+    "name": ".\\Facturas_Templates\\Los Nietitos\\Los Nietitos_template.jpg"
+}

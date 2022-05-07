@@ -1,0 +1,44 @@
+{
+    "Cliente": [
+        [
+            180,
+            223
+        ],
+        [
+            885,
+            277
+        ]
+    ],
+    "Fecha": [
+        [
+            941,
+            270
+        ],
+        [
+            1102,
+            310
+        ]
+    ],
+    "Numero": [
+        [
+            1366,
+            263
+        ],
+        [
+            1496,
+            317
+        ]
+    ],
+    "Total": [
+        [
+            1466,
+            885
+        ],
+        [
+            1603,
+            938
+        ]
+    ],
+    "extension": ".png",
+    "name": ".\\Facturas_Templates\\Marioni\\Marioni_template.png"
+}
