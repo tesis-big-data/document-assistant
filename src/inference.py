@@ -12,4 +12,4 @@ if __name__ == "__main__":
     classify_documents()
     extract_fields()
     save_processing()
-    dvc_push_data()
+    # dvc_push_data()

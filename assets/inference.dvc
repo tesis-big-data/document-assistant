@@ -1,5 +1,5 @@
 outs:
-- md5: 19937287dc53d9b4b7e01e6e5aed621e.dir
-  size: 195897
-  nfiles: 6
+- md5: bdc1691c45de347df6b39bf0dc2a1de8.dir
+  size: 65117620
+  nfiles: 53
   path: inference
