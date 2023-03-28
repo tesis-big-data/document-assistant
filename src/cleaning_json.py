@@ -36,8 +36,8 @@ def remove_unconfident_words(doc_conf, doc_text):
 
 
 def concat_text(json_doc):
-    doc_conf = json_doc["OCR_Data"]["conf"]
-    doc_text = json_doc["OCR_Data"]["text"]
+    doc_conf = json_doc["OCR"]["Classification_OCR"]["OCR_Data"]["conf"]
+    doc_text = json_doc["OCR"]["Classification_OCR"]["OCR_Data"]["text"]
     doc_text = remove_unconfident_words(doc_conf, doc_text)
     return " ".join(doc_text)
 
@@ -71,22 +71,20 @@ def clean_documents_training():
     df.to_parquet(CLEANED_DATASET_FILE, index=False)
 
 
-def clean_documents_inference():
+def clean_documents_inference(uuid_filename):
     df = pd.DataFrame()
     data = []
-    file_dirs = os.listdir(INFERENCE_CURRENT_EXEC_JSON_PATH)
 
     print(f"Cleaning inference documents...")
-    for file in file_dirs:
-        doc = open(f"{INFERENCE_CURRENT_EXEC_JSON_PATH}/{file}")
-        json_doc = json.load(doc)
-        doc_text = concat_text(json_doc)
-        data.append(
-            {
-                "document_id": json_doc["document_id"],
-                "OCR_text": doc_text,
-            }
-        )
+    doc = open(f"{INFERENCE_CURRENT_EXEC_JSON_PATH}/{uuid_filename}.json")
+    json_doc = json.load(doc)
+    doc_text = concat_text(json_doc)
+    data.append(
+        {
+            "document_id": json_doc["General_Data"]["Assigned_UUID"],
+            "OCR_text": doc_text,
+        }
+    )
 
     df = df.append(data, ignore_index=True)
     print(df)

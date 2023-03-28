@@ -5,6 +5,10 @@ from environs import Env
 from pathlib import Path
 from typing import List
 import time
+import simplejson as json
+from constants import (
+    AZURE_AUTH_KEYS_PATH
+)
 
 env = Env()
 env.read_env()
@@ -20,8 +24,11 @@ class AzureOCR:
     """
 
     def _authenticate_azure_ocr(self):
-        subscription_key = "33c11e77685b420aa4819823958cad56"
-        endpoint = "https://ort.cognitiveservices.azure.com/"
+        json_file = open(AZURE_AUTH_KEYS_PATH)
+        json_keys = json.load(json_file)
+
+        subscription_key = json_keys["subscription_key"]
+        endpoint = json_keys["endpoint"]
 
         return ComputerVisionClient(
             endpoint, CognitiveServicesCredentials(subscription_key)

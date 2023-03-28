@@ -74,30 +74,30 @@ def get_ocr_data_keypoints(
     Image_To_Convert, json_template_data, json_img_data, retry_ocr=True
 ):
     for keypoint in json_template_data:
-        if keypoint in json_img_data:
-            del json_img_data[keypoint]
+        if keypoint in json_img_data["Extracted_Data"]:
+            del json_img_data["Extracted_Data"][keypoint]
         if not (keypoint == "extension" or keypoint == "name"):
             x_inicial_template = json_template_data[keypoint][0][0]
             y_inicial_template = json_template_data[keypoint][0][1]
             x_final_template = json_template_data[keypoint][1][0]
             y_final_template = json_template_data[keypoint][1][1]
-            for i in range(len(json_img_data["OCR_Data_Crop"]["text"])):
-                x_centro_palabra = json_img_data["OCR_Data_Crop"]["left"][i] + round(
-                    json_img_data["OCR_Data_Crop"]["width"][i] / 2
+            for i in range(len(json_img_data["OCR"]["Extraction_OCR"]["text"])):
+                x_centro_palabra = json_img_data["OCR"]["Extraction_OCR"]["left"][i] + round(
+                    json_img_data["OCR"]["Extraction_OCR"]["width"][i] / 2
                 )
-                y_centro_palabra = json_img_data["OCR_Data_Crop"]["top"][i] + round(
-                    json_img_data["OCR_Data_Crop"]["height"][i] / 2
+                y_centro_palabra = json_img_data["OCR"]["Extraction_OCR"]["top"][i] + round(
+                    json_img_data["OCR"]["Extraction_OCR"]["height"][i] / 2
                 )
                 if x_inicial_template <= x_centro_palabra <= x_final_template:
                     if y_inicial_template <= y_centro_palabra <= y_final_template:
-                        if keypoint in json_img_data:
-                            json_img_data[keypoint] = (
-                                json_img_data[keypoint]
+                        if keypoint in json_img_data["Extracted_Data"]:
+                            json_img_data["Extracted_Data"][keypoint] = (
+                                json_img_data["Extracted_Data"][keypoint]
                                 + " "
-                                + json_img_data["OCR_Data_Crop"]["text"][i]
+                                + json_img_data["OCR"]["Extraction_OCR"]["text"][i]
                             )
                         else:
-                            json_img_data[keypoint] = json_img_data["OCR_Data_Crop"][
+                            json_img_data["Extracted_Data"][keypoint] = json_img_data["OCR"]["Extraction_OCR"][
                                 "text"
                             ][i]
 
@@ -111,12 +111,12 @@ def get_ocr_data_keypoints(
                 # cv2.imshow("crop",img_aux)
                 if len(crop_ocr["text"]) > 0:
                     for word in crop_ocr["text"]:
-                        if keypoint in json_img_data:
-                            json_img_data[keypoint] = (
-                                json_img_data[keypoint] + " " + word
+                        if keypoint in json_img_data["Extracted_Data"]:
+                            json_img_data["Extracted_Data"][keypoint] = (
+                                json_img_data["Extracted_Data"][keypoint] + " " + word
                             )
                         else:
-                            json_img_data[keypoint] = "(CROP) " + word
+                            json_img_data["Extracted_Data"][keypoint] = "(CROP) " + word
     return json_img_data
 
 
@@ -297,7 +297,7 @@ def manual_adjust_image_rotation(Image_To_Convert):
 
 # Función para corregir manualmente la rotación de una imagen
 # Devuelve Imagen rotada a cuadrante mas cercano, y angulo de rotación
-def auto_adjust_image_rotation(Image_To_Convert):
+def auto_adjust_image_rotation(Image_To_Convert,Image_Data):
     adaptiveThreshold_1 = 31
     adaptiveThreshold_2 = 20
     correction_angle = 0
@@ -336,7 +336,8 @@ def auto_adjust_image_rotation(Image_To_Convert):
             lines_touple.append((angle, length, x1, y1, x2, y2))
 
         if len(lines_touple) == 0:
-            return Image_To_Convert, correction_angle  # No lines No adjustment
+            Image_Data["General_Data"]["Adjusted_Image_Correction_Angle"] = correction_angle
+            return Image_To_Convert, Image_Data  # No lines No adjustment
 
         lines_touple.sort(key=lambda x: x[1])
 
@@ -377,12 +378,14 @@ def auto_adjust_image_rotation(Image_To_Convert):
     except:
         print("No se encuentran lineas de alineación se saltea archivo")
 
-    return Image_To_Convert, correction_angle
+    Image_Data["General_Data"]["Adjusted_Image_Correction_Angle"] = correction_angle
+
+    return Image_To_Convert, Image_Data
 
 
 # Función para corregir orientación de la pagina para que texto quede bien orientado
 # Devuelve Imagen rotada a cuadrante mas cercano, y angulo de rotación
-def adjust_image_orientation(Image_To_Convert):
+def adjust_image_orientation(Image_To_Convert,Image_Data):
     OCR_Orientation_Angle = 0
     try:
         temp_file = f"{tempfile.NamedTemporaryFile()}.png"
@@ -405,8 +408,10 @@ def adjust_image_orientation(Image_To_Convert):
         Image_To_Convert = ndimage.rotate(
             Image_To_Convert, -OCR_Orientation_Angle, cval=255
         )
+        
+    Image_Data["General_Data"]["Adjusted_Image_Orientation"] = OCR_Orientation_Angle
 
-    return Image_To_Convert, OCR_Orientation_Angle
+    return Image_To_Convert, Image_Data
 
 
 # Función para extraer el OCR de una imagen, devuelve imagen procesada y datos de OCR
@@ -500,7 +505,7 @@ def get_ocr_data_azure(
 
 
 # Función para ajustar el tamaño de la imagen, devuelve imagen con tamaño ajustado
-def adjust_image_size(Image_To_Convert, Max_Size=1700):
+def adjust_image_size(Image_To_Convert, Image_Data, Max_Size=1700):
     # Get height and width of the image
     img_height = Image_To_Convert.shape[0]
     img_width = Image_To_Convert.shape[1]
@@ -526,14 +531,14 @@ def adjust_image_size(Image_To_Convert, Max_Size=1700):
         Image_To_Convert = cv2.resize(
             Image_To_Convert, dim, interpolation=cv2.INTER_AREA
         )
-    json_data = {}
-    json_data["orig_height"] = img_height
-    json_data["orig_width"] = img_width
-    json_data["scale_percent"] = scale_percent
-    json_data["adj_height"] = height
-    json_data["adj_width"] = width
 
-    return Image_To_Convert, json_data
+    Image_Data["General_Data"]["Original_Height"] = img_height
+    Image_Data["General_Data"]["Original_Width"] = img_width
+    Image_Data["General_Data"]["Adjusted_Scale_Percent"] = scale_percent
+    Image_Data["General_Data"]["Adjusted_Height"] = height
+    Image_Data["General_Data"]["Adjusted_Width"] = width
+
+    return Image_To_Convert, Image_Data
 
 
 def draw_text(
